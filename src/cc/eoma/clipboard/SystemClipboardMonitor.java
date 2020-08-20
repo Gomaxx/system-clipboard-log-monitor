@@ -33,7 +33,9 @@ public class SystemClipboardMonitor implements ClipboardOwner {
             ex.printStackTrace();
         }
 
+        System.out.println("clipboard add new text:" + text);
         if (text.startsWith("@log")) {
+            System.out.println("====> add log");
             this.appendToFile("/home/goma/Desktop/xxxxx", text.substring(4, text.length()));
         }
 
