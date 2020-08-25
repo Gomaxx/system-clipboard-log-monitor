@@ -23,7 +23,7 @@ public class SystemClipboardMonitor implements ClipboardOwner {
 
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
-        if (clipboard.isDataFlavorAvailable(DataFlavor.imageFlavor)) {
+        if (clipboard.isDataFlavorAvailable(DataFlavor.imageFlavor) || clipboard.isDataFlavorAvailable(DataFlavor.javaFileListFlavor)) {
             try {
                 /*
                     如果是 IMAGE 信息时，在VirtualBox虚拟机中粘帖会报错，导致VirtualBox虚拟机异常关闭（在 其他地方未发现类似问题）;
@@ -41,6 +41,9 @@ public class SystemClipboardMonitor implements ClipboardOwner {
             }
             return;
         }
+
+
+
 
         if (!clipboard.isDataFlavorAvailable(DataFlavor.stringFlavor)) {
             clipboard.setContents(contents, this);
